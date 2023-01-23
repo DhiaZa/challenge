@@ -1,18 +1,17 @@
 <!-- nav -->
-<nav class="sidenav " *ngIf="currentUser">
+<nav class="sidenav " *ngIf="connected && !isLogout">
   <div class="navbar-nav ">
-      <a class="nav-item nav-link" routerLink="/">Home</a>
-      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+      <i class="bi bi-speedometer2" routerLink="/dashboard"></i>
+      <i class="bi bi-file-earmark-plus" routerLink="/add-event"></i>
+      <i class="bi bi-box-arrow-in-right" (click)="logout()"></i>
+
   </div>
 </nav>
+
 
 <!-- main app container -->
 <div class="container main">
   <router-outlet></router-outlet>
 </div>
 
-<!-- credits -->
-<div class="text-center mt-4">
 
-
-</div>

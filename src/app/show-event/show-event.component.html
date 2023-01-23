@@ -1,72 +1,63 @@
-<h1 *ngIf="!isAddMode">Edit Event</h1>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<h1 *ngIf="!isAddMode">Event Details</h1>
+<form [formGroup]="form" >
     <div class="form-row">
+
         <div class="form-group col">
+
+        <img  width="186px" height="184px" src="{{imageEvent}}">
+    </div>
+    <div class="col-inputs">
+
+        <div class="form-group col3">
+            <label>Category</label>
+            <input readonly type="text" formControlName="category" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['category'].errors }" />
+
+        </div>
+        <div class="form-group col-5">
             <label>Title</label>
-            <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['title'].errors }">
-                <option value=""></option>
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Ms">Ms</option>
-            </select>
+            <input readonly type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['title'].errors }" />
             <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
                 <div *ngIf="f['title'].errors['required']">Title is required</div>
             </div>
         </div>
-        <div class="form-group col-5">
-            <label>First Name</label>
-            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" />
-            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+  
+    </div>
+</div>
+      <div class="form-group col-12">
+        <label>Description</label>
+        <textarea readonly class="form-control" id="textAreaExample1" rows="4" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" ></textarea>
+        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+            <div *ngIf="f['description'].errors['required']">Description is required</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label>Day</label>
+            <input readonly type="date" class="time-input" formControlName="day" />
+            <div *ngIf="submitted && f['day'].errors" class="invalid-feedback">
+                <div *ngIf="submitted && f['day']?.errors?.['required']">Day is required</div>
             </div>
         </div>
-        <div class="form-group col-5">
-            <label>Last Name</label>
-            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" />
-            <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
-                <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+        <div class="form-group col">
+            <label>Start</label>
+            <input readonly type="time" class="time-input" formControlName="start" />
+            <div *ngIf="submitted && f['start'].errors" class="invalid-feedback">
+                <div *ngIf="submitted && f['start']?.errors?.['required']">Start date is required</div>
             </div>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-7">
-            <label>Email</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
-            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                <div *ngIf="f['email'].errors['required']">Email is required</div>
-                <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+            <label>Location</label>
+            <input readonly type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['location'].errors }" />
+            <div *ngIf="submitted && f['location'].errors" class="invalid-feedback">
+                <div *ngIf="f['location'].errors['required']">Location is required</div>
             </div>
         </div>
  
-    </div>
-    <div *ngIf="!isAddMode">
-        <h3 class="pt-3">Change Password</h3>
-        <p>Leave blank to keep the same password</p>
-    </div>
-    <div class="form-row">
-        <div class="form-group col">
-            <label>Password</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
-            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                <div *ngIf="f['password'].errors['required']">Password is required</div>
-                <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
-            </div>
-        </div>
-        <div class="form-group col">
-            <label>Confirm Password</label>
-            <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }" />
-            <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
-                <div *ngIf="f['confirmPassword'].errors['required']">Confirm Password is required</div>
-                <div *ngIf="f['confirmPassword'].errors['mustMatch']">Passwords must match</div>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Save
-        </button>
-        <a routerLink="/dashboard" class="btn btn-link">Cancel</a>
-    </div>
+    
+   
+</div>
+         
+    
 </form>

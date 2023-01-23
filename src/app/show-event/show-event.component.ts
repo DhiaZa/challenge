@@ -18,7 +18,7 @@ export class ShowEventComponent implements OnInit {
   isAddMode!: boolean;
   loading = false;
   submitted = false;
-
+  imageEvent:any;
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -35,49 +35,28 @@ export class ShowEventComponent implements OnInit {
       const passwordValidators = [Validators.minLength(6)];
   
 
-      const formOptions: AbstractControlOptions = { validators: MustMatch('password', 'confirmPassword') };
       this.form = this.formBuilder.group({
+        category: ['', Validators.required],
           title: ['', Validators.required],
-          firstName: ['', Validators.required],
-          lastName: ['', Validators.required],
-          email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.minLength(6), this.isAddMode ? Validators.required : Validators.nullValidator]],
-          confirmPassword: ['', this.isAddMode ? Validators.required : Validators.nullValidator]
-      }, formOptions);
+          description: ['', Validators.required],
+          image: ['', Validators.required],
+          file: [''],
+          location: ['', Validators.required],
+          day: ['', Validators.required],
+          start: ['', Validators.required],
+      });
 
       if (!this.isAddMode) {
-          this.eventService.getById(this.id)
-              .pipe(first())
-              .subscribe(x => this.form.patchValue(x));
+          this.eventService.getById(this.id).subscribe((x) => {this.form.patchValue(x)
+            this.imageEvent=x.image
+          }
+            );
+              
       }
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
-  onSubmit() {
-      this.submitted = true;
 
-      // reset alerts on submit
-      this.alertService.clear();
-
-      // stop here if form is invalid
-      if (this.form.invalid) {
-          return;
-      }
-
-      this.loading = true;
-
-          this.updateEvent();
-  }
-
-  private updateEvent() {
-      this.eventService.update(this.id, this.form.value)
-          .pipe(first())
-          .subscribe(() => {
-              this.alertService.success('event updated', { keepAfterRouteChange: true });
-              this.router.navigate(['/dashboard'], { relativeTo: this.route });
-          })
-          .add(() => this.loading = false);
-  }
 }

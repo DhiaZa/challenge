@@ -9,14 +9,6 @@ const eventsJSON = localStorage.getItem(eventsKey);
 let events: any[] = eventsJSON
   ? JSON.parse(eventsJSON)
   : [
-      {
-        id: 1,
-        title: 'Mr',
-        firstName: 'Joe',
-        lastName: 'Bloggs',
-        email: 'joe@bloggs.com',
-        password: 'joe123',
-      },
     ];
 const users: User[] = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
 
@@ -99,8 +91,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       function createEvent() {
         const event = body;
   
-        if (events.find((x) => x.email === event.email)) {
-          return error(`User with the email ${event.email} already exists`);
+        if (events.find((x) => x.id === event.id)) {
+          return error(`User with the email ${event.id} already exists`);
         }
   
         // assign event id and a few other properties then save
@@ -156,8 +148,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
   
       function basicDetails(event: any) {
-        const { id, title, firstName, lastName, email, role } = event;
-        return { id, title, firstName, lastName, email, role };
+        const { id, category, title, description,image,file, location , day, start} = event;
+        return { id, category, title, description,image,file, location  , day, start};
       }
   
       function idFromUrl() {

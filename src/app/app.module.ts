@@ -14,7 +14,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddEventComponent } from './add-event/add-event.component';
 import { DetailsEventComponent } from './details-event/details-event.component';
 import { ShowEventComponent } from './show-event/show-event.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     DashboardComponent,
     AddEventComponent,
     DetailsEventComponent,
-    ShowEventComponent,
-    SidebarComponent
+    ShowEventComponent
   ],
   imports: [ HttpClientModule, RouterModule.forRoot([]),
     BrowserModule,

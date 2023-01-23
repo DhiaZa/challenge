@@ -1,28 +1,57 @@
+
+<div class="inline-block">
+    <div>
+<span>Dashboard</span>
+</div>
+
+
+<div class="right-side">
+
+<select (change)="filterByDate($event)" >
+    <option value=""></option>
+    <option value="week">Week</option>
+    <option value="month">Month</option>
+    <option value="all">All Time</option>
+</select>
+<a (click)="navigateToAdd()" class="btn btn-sm btn-success mb-2 ">Add Event</a>
+
+</div>
+
+</div>
+
+<br>
+<div *ngIf="events.length">
 <h1>Stats</h1>
 
-<p>There are {{events.length}} events</p>
-
-
+<span>There are {{events.length}} events</span>
+<br>
+<span>{{festivalpercent}} %  Festivals</span>
+<br>
+<span>{{sportpercent}} %  Sports</span>
+<br>
+<span>{{conferencepercent}} %  Conferances</span>
+<br>
+<span>{{concertpercent}} %  Concerets</span>
 <hr>
 <h1>Events</h1>
-<a (click)="navigateToAdd()" class="btn btn-sm btn-success mb-2">Add Event</a>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th style="width: 30%">Name</th>
-            <th style="width: 30%">Email</th>
-            <th style="width: 30%">Role</th>
+            <th style="width: 30%">Title</th>
+            <th style="width: 30%">Descrption</th>
+            <th style="width: 30%">Image</th>
             <th style="width: 10%"></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let event of events">
-            <td>{{event.title}} {{event.firstName}} {{event.lastName}}</td>
-            <td>{{event.email}}</td>
-            <td>ddddd</td>
+            <td>{{event.title}}</td>
+            <td>{{event.description}}</td>
+            <td>     <img  width="96px" height="64px" src="{{event.image}}">
+            </td>
             <td style="white-space: nowrap">
-                <a routerLink="show-event/{{event.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <a routerLink="show-event/{{event.id}}" class="btn btn-sm btn-primary mr-1">Show</a>
                 <button (click)="deleteEvent(event.id)" class="btn btn-sm btn-danger btn-delete-event" [disabled]="event.isDeleting">
                     <span *ngIf="event.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!event.isDeleting">Delete</span>
@@ -36,3 +65,12 @@
         </tr>
     </tbody>
 </table>
+</div>
+
+
+<div class="container-no-events d-flex flex-column" *ngIf="!events.length">
+    <span>   No events yet </span>
+    <a (click)="navigateToAdd()" class="btn btn-sm btn-success mb-2 right-side">Create an event</a>
+</div>
+
+

@@ -1,8 +1,12 @@
 export interface Event {
     id: string;
+    category: string;
     title: string;
-    firstName: string;
-    lastName: string;
-    email: string;
+    description: string;
+    image: string;
+    file:string;
+    location: string;
+    start: Date;
+    day: Date;
     isDeleting: boolean ;
 }
